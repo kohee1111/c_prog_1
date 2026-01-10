@@ -8,3 +8,20 @@ int main(void){
     printf("I am fucking back") ;
     return 0 ;
 }
+//for Alpha numeric 
+#include<stdio.h>
+#include<ctype.h>
+
+int main(void){
+
+    char ch = '.' ; 
+    if(isalnum(ch)){
+
+        printf("%c is alpha numeric !\n" , ch) ;
+    }else{
+
+        printf("%c is not alpha numeric !\n" , ch ) ;
+    }
+    return 0 ;
+}
+//
