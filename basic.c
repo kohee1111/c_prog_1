@@ -46,3 +46,36 @@ int main(void){
     }
     return 0 ;
 }
+//learning about custom functions ....to make reusable code 
+#include<stdio.h>
+#include<unistd.h>
+#include<stdlib.h>
+FILE *open_my_file(const char *file_name , const char *mode){
+
+    FILE *fp = fopen(file_name , mode) ; 
+    if(fp == NULL){
+
+        perror("Failed \n") ;
+        exit(EXIT_FAILURE) ;
+    }
+    return fp ;
+}
+int main(void){
+    const char *file_name = "log.c" ; 
+
+    FILE *file_pointer = open_my_file("log.c" , "w+") ; 
+    if(file_pointer == NULL){
+        return -1 ;
+    }
+    if(fprintf(file_pointer  , "Hello world and I am back !") < 0){
+        printf("Failed to write in file %s\n" , file_name)  ; 
+        exit(EXIT_FAILURE) ;
+    }
+    if(ferror(file_pointer)){
+
+        printf("Error detected \n") ; 
+        clearerr(file_pointer) ;
+    }
+    fclose(file_pointer) ;
+    return 0 ;
+}
