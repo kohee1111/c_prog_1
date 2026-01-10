@@ -24,4 +24,25 @@ int main(void){
     }
     return 0 ;
 }
-//
+///learning all functions form stdio.h source 
+//code example to learn clearerr() ;
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+
+    FILE *fp = fopen("log.c" , "r") ; 
+    if(fp == NULL) {
+
+        perror("Failed to open file !\n") ; 
+        return -1;
+    }
+    if(fputc('A' , fp) == EOF){
+        perror("Failed to write ~!") ;
+    }
+    if(ferror(fp)){
+
+        printf("Error deteced ....cleaning error !~") ; 
+        clearerr(fp) ;
+    }
+    return 0 ;
+}
