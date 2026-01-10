@@ -79,3 +79,4 @@ int main(void){
     fclose(file_pointer) ;
     return 0 ;
 }
+//dprintf() vs fprintf() ........fprintf() use for simple formated stdout and stderr only for file stream but dprintf() only used for file descriptor ....so its compare to more lower level 
