@@ -87,4 +87,27 @@ int main(void){
     dprintf(STDIN_FILENO , "Hello world via dprintf()\n") ; 
     return 0  ;
 }
+//another simple example of dprintf() and fd's
+#include<errno.h>
+#include<stdio.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<fcntl.h>
+#include<string.h>
+int main(void){
+    const char *file_name = "log.c" ;
+    int file_des = open(file_name , O_WRONLY | O_CREAT | O_TRUNC , 0x1A4 ) ; 
+    if(file_des < 0){
+        dprintf(STDERR_FILENO , "Failed :%s\n" , strerror(errno)) ;
+        exit(EXIT_FAILURE) ; 
+    }
+    signed int n = dprintf(file_des , "Writing something via dprintf and low level sys-calls\n") ;
+    if(n < 0){
 
+        dprintf(STDERR_FILENO , "Failed :%s" , strerror(errno)) ;
+        close(file_des) ;
+        exit(EXIT_FAILURE) ;
+    }
+    close(file_des) ;
+    return 0 ;
+}
