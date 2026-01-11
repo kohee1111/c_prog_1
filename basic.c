@@ -80,3 +80,11 @@ int main(void){
     return 0 ;
 }
 //dprintf() vs fprintf() ........fprintf() use for simple formated stdout and stderr only for file stream but dprintf() only used for file descriptor ....so its compare to more lower level 
+//simple example of dprintf 
+#include<stdio.h>
+#include<unistd.h>
+int main(void){
+    dprintf(STDIN_FILENO , "Hello world via dprintf()\n") ; 
+    return 0  ;
+}
+
