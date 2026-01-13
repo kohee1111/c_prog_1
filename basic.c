@@ -176,3 +176,19 @@ int main(void){
     close(file_des) ;
     return 0 ;
 }
+//another simple example 
+#include <stdio.h>
+#include <stdarg.h>
+#include <unistd.h>
+int myprintf(const char *fmt, ...) {
+    va_list ap;
+    int ret;
+    va_start(ap, fmt);
+    ret = vdprintf(STDOUT_FILENO, fmt, ap);
+    va_end(ap);
+    return ret;
+}
+int main() {
+    myprintf("Dark power: %s %d\n", "vdprintf", 666);
+    return 0;
+}
