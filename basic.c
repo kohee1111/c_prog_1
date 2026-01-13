@@ -111,3 +111,40 @@ int main(void){
     close(file_des) ;
     return 0 ;
 }
+//multiple code combined 
+#include<stdio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<unistd.h>
+#include<fcntl.h>
+#include<errno.h>
+#include<stdarg.h>
+int open_my_file(const char *file_name ,  int flags , mode_t permission){
+
+    int fd = open(file_name , flags  , permission) ; 
+    if(fd < 0){
+        dprintf(STDERR_FILENO , "Failed to open :%s" , strerror(errno)) ; 
+        exit(EXIT_FAILURE) ;
+    }
+    return fd ;
+}
+void my_print_func(const char *fmt , ...){
+
+    va_list args ; 
+    va_start(args , fmt) ; 
+    vdprintf(STDOUT_FILENO  , fmt , args) ; 
+    va_end(args) ; 
+}
+int main(void){
+    my_print_func("Printing something via custom func") ; 
+    const char *file_name = "log.c" ;
+    int file_des = open(file_name , O_WRONLY | O_CREAT | O_TRUNC , 0x1A4)  ; 
+    signed int n = dprintf(file_des , "Writing something via dprintf and low level system call") ; 
+    if(n < 0){
+        dprintf(STDERR_FILENO , "Failed to write in the file :%s\n" , strerror(errno)) ; 
+        close(file_des) ; 
+        exit(EXIT_FAILURE) ;
+    }
+    close(file_des) ; 
+    return 0 ;
+} 
