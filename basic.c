@@ -148,3 +148,31 @@ int main(void){
     close(file_des) ; 
     return 0 ;
 } 
+//pure custom function 
+//avoid using void in the system level for caller control 
+#include<stdio.h>
+#include<unistd.h>
+#include<string.h>
+#include<errno.h>
+#include<stdlib.h>
+#include<fcntl.h>
+#include<stdarg.h>
+void  write_file(int fd , const char *fmt ,...){
+    va_list args  ;
+    va_start(args , fmt) ; 
+    vdprintf(fd , fmt , args) ; 
+    va_end(args) ; 
+}
+
+int main(void){
+    const char *file_name = "log.c" ;
+    int file_des = open(file_name , O_WRONLY | O_CREAT | O_TRUNC , 0x1A4) ;
+    if(file_des < 0){
+
+        dprintf(STDERR_FILENO , "Failed to open file :%s\n" , strerror(errno))  ;
+        return -1 ; 
+    }
+    write_file(file_des , "process id is :%d\n" , getpid()) ; 
+    close(file_des) ;
+    return 0 ;
+}
