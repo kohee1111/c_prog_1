@@ -192,3 +192,35 @@ int main() {
     myprintf("Dark power: %s %d\n", "vdprintf", 666);
     return 0;
 }
+//learn to return .....another simple example 
+#include<stdio.h>
+#include<string.h>
+#include<unistd.h>
+#include<stdarg.h>
+#include<stdlib.h>
+#include<errno.h>
+int print_func_ret(int fd , const char *fmt , ...){
+    int ret ; 
+    va_list args ; 
+    va_start(args , fmt) ; 
+    ret = vdprintf(STDOUT_FILENO , fmt , args) ; 
+    va_end(args) ; 
+    return ret ;
+}
+void void_func(int fd , const char *fmt , ...){
+    va_list args ; 
+    va_start(args , fmt) ; 
+    vdprintf(STDOUT_FILENO , fmt , args) ; 
+    va_end(args) ;
+}
+
+int main(void){
+    const char *message = "Hello world" ; 
+    int n = print_func_ret(STDOUT_FILENO , "Hello world and again :%s" , message) ; 
+    if(n < 0){
+        dprintf(STDERR_FILENO , "ERROR :%s\n"  , strerror(errno)) ;
+        return -1 ;
+    }
+    void_func(STDOUT_FILENO , "ANOTHER message :%s\n" , message) ;
+    return 0 ; 
+}
