@@ -224,3 +224,17 @@ int main(void){
     void_func(STDOUT_FILENO , "ANOTHER message :%s\n" , message) ;
     return 0 ; 
 }
+//another simple example
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.c" , "r") ; 
+    if(!fp){
+        perror("Failed to open file @!") ; 
+        return -1 ;
+    }
+    int ch ; 
+    while((ch = fgetc(fp)) != EOF){
+        putchar(ch) ;
+    }
+}
