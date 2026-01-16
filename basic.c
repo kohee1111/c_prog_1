@@ -238,3 +238,30 @@ int main(void){
         putchar(ch) ;
     }
 }
+//another example : right use of eof and feof 
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.c" , "r") ; 
+    if(fp == NULL){
+        fprintf(stderr , "Failed to open file !") ; 
+        return -1 ;
+    }
+    int ch  ; 
+    while(1){
+        ch = fgetc(fp) ; 
+        if(ch == EOF){
+            if(feof(fp)){
+                break ;
+            }
+            if(ferror(fp)){
+                perror("Failed to  read file !") ; 
+                fclose(fp) ;
+                return -1 ;
+            }
+        }
+        putchar(ch)  ;
+    }
+    fclose(fp) ; 
+    return 0 ;
+}
