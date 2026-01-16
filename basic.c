@@ -284,3 +284,27 @@ int main(void){
     fclose(file) ; 
     return 0;
 }
+//learn fflush() ; 
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    printf("> ") ; 
+    fflush(stdout) ; 
+    char ch ; 
+    ch = getchar() ; 
+    printf("Your char is :%c\n" , ch) ;
+}
+//another : "Power 1 done" string writing immediately before any unexpected crash or error 
+//usecase : Database , loggin system 
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.c"  ,"w") ; 
+    if(fp == NULL){
+        return -1  ;
+    }
+    fputs("Power 1 done !" , fp) ; 
+    fflush(fp) ;
+    fputs("Power 2 done !" , fp) ;
+    fclose(fp) ;
+}
