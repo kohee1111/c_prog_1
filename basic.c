@@ -308,3 +308,31 @@ int main(void){
     fputs("Power 2 done !" , fp) ;
     fclose(fp) ;
 }
+//learning fgetpos() and fsetpos() 
+//file manupulation and bookmarking 
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.c" , "r") ; 
+    if(fp == NULL){
+        return -1 ;
+    }
+    int ch ; 
+    fpos_t pos  ; 
+    for(int i = 0 ; i < 10 && (ch = fgetc(fp)) != EOF ; i++){
+        putchar(ch) ; 
+    }
+    printf("\n") ; 
+    fgetpos(fp , &pos) ; 
+    for(int i = 0 ; i < 5 && (ch = fgetc(fp)) != EOF ; i++){
+        putchar(ch) ;
+    }
+    printf("\n") ;
+    fsetpos(fp , &pos) ; 
+    for(int i = 0 ; i < 5 && (ch = fgetc(fp)) != EOF ; i++){
+        putchar(ch) ;
+    }
+    printf("\n") ;
+    fclose(fp) ; 
+    return 0;
+}
