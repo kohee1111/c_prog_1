@@ -1,4 +1,4 @@
-//converting form a chat to int (ASCII) 
+//converting form a char to int (ASCII) 
 #include<stdio.h>
 #include<string.h>
 int main(void){
