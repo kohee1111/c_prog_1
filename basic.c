@@ -265,3 +265,22 @@ int main(void){
     fclose(fp) ; 
     return 0 ;
 }
+//learn ferror 
+#include<stdio.h>
+#include<stdlib.h>
+#include<stdlib.h>
+int main(void){
+    FILE *file = fopen("log.c" , "w") ; 
+    if(file == NULL){
+        perror("Failed to open file !") ; 
+        return -1;
+    }
+    fputs("Hello world and kohee !" , file) ; 
+    if(ferror(file)){
+        perror("Failed to write file @!") ; 
+        fclose(file) ; 
+        return -1 ;
+    }
+    fclose(file) ; 
+    return 0;
+}
