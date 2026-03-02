@@ -43,3 +43,26 @@ int main(void){
     return 0  ;
 }
 _____________________________
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+
+    FILE *fp = fopen("hello.c" , "r+") ; 
+    if(fp == NULL){
+
+        return -1 ;
+    }
+    fprintf(fp , "Hello world and ibbo") ; 
+    fseek(fp , 0 , SEEK_SET) ; 
+    int ch  ; 
+
+    ch = fgetc(fp) ; 
+    while(ch != EOF){
+
+        putchar(ch) ;
+        ch = fgetc(fp) ;
+    }
+    fclose(fp) ; 
+    return 0 ;
+}
+_____________________________________
