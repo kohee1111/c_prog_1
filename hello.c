@@ -86,3 +86,51 @@ int main(void){
     fclose(fp) ; 
     return 0 ;
 }
+______________________________________
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("hello.c" , "a+") ; 
+    if(fp == NULL){
+        perror("Failed to open file !\n") ; 
+        return -1 ;
+    }
+    fprintf(fp , "hello world and ow we are appending ...no data will be vanish !") ; 
+    fflush(fp) ; 
+    fseek(fp , 0  , SEEK_SET) ;
+    fclose(fp) ; 
+    fp = fopen("hello.c" , "r+") ; 
+    if(!fp){
+        return -1 ;
+    }
+    int ch ; 
+    ch = fgetc(fp) ; 
+    while(ch != EOF){
+        putchar(ch) ; 
+        ch = fgetc(fp) ; 
+    }
+    if(ferror(fp)){
+        perror("Some error found !") ;
+    }
+    fclose(fp) ; 
+    return 0 ;
+}
+____________________________________________
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("hello.c" , "r") ; 
+    if(fp == NULL){
+        return -1 ;
+    }
+    int ch ; 
+    int i = 0; 
+    char buffer[200] ; 
+    while((ch = fgetc(fp)) != EOF && i < 199){
+        buffer[i++] = ch ;
+    }
+    buffer[i] = '\0' ; 
+    printf("Your buffer is :%s\n" , buffer) ; 
+    fclose(fp) ; 
+    return 0 ;
+}
