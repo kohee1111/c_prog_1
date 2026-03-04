@@ -134,3 +134,41 @@ int main(void){
     fclose(fp) ; 
     return 0 ;
 }
+________________very_important_code_____________
+#include<stdio.h>
+#include<stdlib.h>
+#define BUF_SIZE 100
+int main(void){
+    FILE *fp = fopen("log.c" , "r+")  ; 
+    if(fp == NULL){
+        perror("Failed to open file !") ;
+        return -1 ;
+    }
+    int ch ; 
+    size_t size = BUF_SIZE ; 
+    size_t i = 0 ; 
+    char *buffer = (char *)malloc(size) ; 
+    while(1){
+        ch = fgetc(fp) ; 
+        if(ch == EOF){ 
+            break ;
+        }
+        if(1 >= size -1){
+            size *= size ; 
+            char *temp = realloc(buffer , size) ; 
+            if(temp == NULL){
+                perror("realloc failed !\n") ; 
+                free(buffer) ; 
+                fclose(fp) ;
+                exit(EXIT_FAILURE);
+            }
+            buffer = temp ;
+        }
+        buffer[i++] = ch ;
+    }
+    buffer[i] = '\0' ; 
+    printf("FILE CONTENT : %s\n" , buffer) ;
+    free(buffer) ; 
+    fclose(fp) ; 
+    return 0 ;
+}
