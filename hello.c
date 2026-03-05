@@ -172,3 +172,17 @@ int main(void){
     fclose(fp) ; 
     return 0 ;
 }
+_______________________another_example 
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.bin" , "wb") ;
+    if(fp == NULL){
+        perror("Failed to open file !") ; 
+        return -1  ;
+    }
+    int buffer[3] = {1 ,  2 , 3} ; 
+    fwrite(buffer , sizeof(buffer[0]) , sizeof(buffer) / sizeof(buffer[0]) , fp) ; 
+    fclose(fp) ; 
+    return 0 ;
+}
