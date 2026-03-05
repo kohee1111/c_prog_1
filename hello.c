@@ -186,3 +186,30 @@ int main(void){
     fclose(fp) ; 
     return 0 ;
 }
+___________________________________
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int write_log(FILE *fp , const char *entry){
+    if(fp == NULL || entry == NULL){
+        exit(EXIT_FAILURE) ;
+    }
+    size_t size = strlen(entry) ; 
+    size_t unit = sizeof(entry[0]) ; 
+    size_t element = size  / unit ; 
+    int written = fwrite(entry , unit , element , fp) ; 
+    if(written != size){
+        return -1 ;
+    }
+    fwrite("\n" ,1 , 1 , fp) ;
+    return 0; 
+}
+int main(void){
+    FILE *fp = fopen("log.c" , "a+") ; 
+    if(fp == NULL){
+        return -1 ;
+    }
+    write_log(fp , "Hello world and writing log !") ; 
+    fclose(fp) ; 
+    return 0;
+}
