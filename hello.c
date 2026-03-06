@@ -253,3 +253,23 @@ int main(void){
     printf("cherecter stopped at char :%c\n" , buffer[size]) ; 
     return 0 ; 
 }
+__________________________________
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main(void){
+    char *buffer[] = {"hello" , "fly" , "love" , "chad"} ; 
+    char vowels[] = "aeiou" ; 
+    size_t size = sizeof(buffer) / sizeof(buffer[0]) ; 
+    int bound = (int )size ;
+    for(int i = 0 ; i < bound ; i++){
+        size_t pos = strcspn(buffer[i] , vowels) ; 
+        
+        if(pos < strlen(buffer[i])){
+            printf("%s has vowel is :%c at position :%d\n" , buffer[i] , buffer[i][pos] , pos) ;
+        }else{
+            printf("%s dosent has vowels !" , buffer[i]) ;
+        }
+    }
+    return 0;
+}
