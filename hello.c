@@ -213,3 +213,19 @@ int main(void){
     fclose(fp) ; 
     return 0;
 }
+__________________________fgets___________________
+#include<stdio.h>
+#include<stdlib.h>
+int main(void){
+    FILE *fp = fopen("log.c"  , "r+") ; 
+    if(!fp){
+        return -1 ;
+    }
+    fseek(fp , 0 , SEEK_SET) ;
+    char buffer[100] ; 
+    while(fgets(buffer , sizeof(buffer) , fp)){
+        printf("Buffer is :%s\n" , buffer) ;
+    }
+    fclose(fp) ; 
+    return 0 ; 
+}
