@@ -229,3 +229,15 @@ int main(void){
     fclose(fp) ; 
     return 0 ; 
 }
+___________________________________
+#include<stdio.h>
+#include<stdlib.h>
+#include<string.h>
+int main(void){
+
+    printf("Input something :")  ; 
+    char buffer[100] ; 
+    fgets(buffer , sizeof(buffer) , stdin) ; 
+    buffer[strcspn(buffer , "\n")] = '\0' ; 
+    printf("Buffer is :%s\n" , buffer) ; 
+}
