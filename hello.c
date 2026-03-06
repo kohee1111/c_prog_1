@@ -241,3 +241,15 @@ int main(void){
     buffer[strcspn(buffer , "\n")] = '\0' ; 
     printf("Buffer is :%s\n" , buffer) ; 
 }
+_______________________________________
+#include<stdio.h>
+#include<string.h>
+int main(void){
+    char buffer[] = "hello world" ; 
+    int  size = strcspn(buffer , "o") ; 
+    printf("The main string is :%s\n" , buffer) ; 
+    printf("size of the buffer :%zu\n" , sizeof(buffer)) ; 
+    printf("cherecter stopped at :%d\n" , size) ; 
+    printf("cherecter stopped at char :%c\n" , buffer[size]) ; 
+    return 0 ; 
+}
